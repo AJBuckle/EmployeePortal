@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#0b3954',
+    backgroundColor: 'rgb(8,126,139)',
   },
 
   form: {
