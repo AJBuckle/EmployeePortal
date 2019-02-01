@@ -35,27 +35,30 @@ export default class App extends Component<Props> {
   }
 
   signIn = () => {
-
     let accountNumber = this.state.accountNumber;
     let password = this.state.password
 
     if (accountNumber.trim() === "") {
       this.setState({ accountNumberRequired: "required" });
-      return
     } else {
       this.setState({ accountNumberRequired: null });
     }
     if (password.trim() === "") {
       this.setState({ passwordRequired: "required" });
-      return
     } else {
-      this.setState({ passwordRequired: null });
+      this.setState({ passwordRequired: null }, () => {
+        if (this.state.accountNumberRequired === null && this.state.passwordRequired === null) {
+          console.log('haha?')
+          this.setState({
+            buttonStatus: true,
+            signInDisabled: true,
+            inputFields: false,
+          });
+        }
+      });
     }
-    this.setState({
-      buttonStatus: true,
-      signInDisabled: true,
-      inputFields: false,
-    });
+
+
     //verify login with database
   }
 
@@ -107,7 +110,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgb(8,126,139)',
+    backgroundColor: '#0b3954',
   },
 
   form: {
