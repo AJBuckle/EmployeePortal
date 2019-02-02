@@ -9,12 +9,11 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, View, Platform } from 'react-native';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import { Input, Button, Text } from 'react-native-elements';
-import {createStore, applyMiddleware} from 'redux'
+import store from './store'
+import { fetchPosts } from './actions/postActions'
 
-
-const store = createStore(() => [], {}, applyMiddleware())
 
 type Props = {};
 const instructions = Platform.select({
@@ -23,7 +22,12 @@ const instructions = Platform.select({
     'Double tap R on your keyboard to reload,\n' +
     'Shake or press menu button for dev menu',
 });
-export default class App extends Component<Props> {
+
+class App extends Component<Props> {
+
+  componenetWillMount(){
+    this.props.fetchPosts();
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -137,3 +141,5 @@ const styles = StyleSheet.create({
   },
 
 });
+
+export default app (null, {fetchPosts})(app)
