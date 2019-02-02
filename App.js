@@ -25,7 +25,7 @@ const instructions = Platform.select({
 
 class App extends Component<Props> {
 
-  componenetWillMount(){
+  componentWillMount(){
     this.props.fetchPosts();
   }
   constructor(props) {
@@ -142,4 +142,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default app (null, {fetchPosts})(app)
+export default App (null, {fetchPosts})(app)
