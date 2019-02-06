@@ -1,8 +1,9 @@
-import { FETCH_POST, NEW_POST } from '../actions/types';
+import { FETCH_POST, LOGIN_USER } from '../actions/types';
 
 const initialState = {
     items:[],
-    item:{}
+    item:{},
+    loginStatus:false
 }
 
 export default function (state = initialState, action) {
@@ -11,6 +12,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 items:action.payload
+            }
+        case LOGIN_USER:
+            console.log("in LOGIN_USER")
+            return{
+                ...state,
+                loginStatus: true
             }
         default:
             return state;

@@ -1,4 +1,4 @@
-import { FETCH_POSTS, NEW_POST, SECOND_REDUCER } from './types';
+import { FETCH_POSTS, NEW_POST, LOGIN_USER } from './types';
 
 
 export const fetchPosts = () => dispatch => {
@@ -16,6 +16,14 @@ export const newPost = data => dispatch => {
         payload:data
     })
 }
+
+export const changeStatus = () => dispatch =>{
+    console.log("In change status")
+    dispatch({
+        type:LOGIN_USER
+    })
+}
+
 // try removing the first or second dispatch
 // this is the changed dispatch
 // probally not using this function
