@@ -9,13 +9,11 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, View, Platform } from 'react-native';
-import { Provider, connect } from 'react-redux';
-import { Input, Button, Text } from 'react-native-elements';
+import { Provider  } from 'react-redux';
+import { Text } from 'react-native-elements';
 import store from './store'
-import { fetchPosts } from './actions/postActions'
+import { Input, Button } from 'react-native-elements';
 
-
-type Props = {};
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
     android:
@@ -23,123 +21,116 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-class App extends Component<Props> {
-
-  componentWillMount(){
-    this.props.fetchPosts();
-  }
-  constructor(props) {
-    super(props);
-    this.state = {
-      accountNumber: "",
-      password: "",
-      buttonStatus: false,
-      signInDisabled: false,
-      inputFields: true,
-      passwordRequired: null,
-      accountNumberRequired: null,
-    }
-  }
-
-  signIn = () => {
-    let accountNumber = this.state.accountNumber;
-    let password = this.state.password
-
-    if (accountNumber.trim() === "") {
-      this.setState({ accountNumberRequired: "required" });
-    } else {
-      this.setState({ accountNumberRequired: null });
-    }
-    if (password.trim() === "") {
-      this.setState({ passwordRequired: "required" });
-    } else {
-      this.setState({ passwordRequired: null }, () => {
-        if (this.state.accountNumberRequired === null && this.state.passwordRequired === null) {
-          console.log('haha?')
-          this.setState({
-            buttonStatus: true,
-            signInDisabled: true,
-            inputFields: false,
-          });
+type Props = {};
+export default class App extends Component<Props> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            accountNumber: "",
+            password: "",
+            buttonStatus: false,
+            signInDisabled: false,
+            inputFields: true,
+            passwordRequired: null,
+            accountNumberRequired: null,
         }
-      });
     }
 
+    signIn = () => {
+        let accountNumber = this.state.accountNumber;
+        let password = this.state.password
 
-    //verify login with database
-  }
+        if (accountNumber.trim() === "") {
+            this.setState({ accountNumberRequired: "required" });
+        } else {
+            this.setState({ accountNumberRequired: null });
+        }
+        if (password.trim() === "") {
+            this.setState({ passwordRequired: "required" });
+        } else {
+            this.setState({ passwordRequired: null }, () => {
+                if (this.state.accountNumberRequired === null && this.state.passwordRequired === null) {
+                    console.log('haha?')
+                    this.setState({
+                        buttonStatus: true,
+                        signInDisabled: true,
+                        inputFields: false,
+                    });
+                }
+            });
+        }
 
-  render() {
-    return (
-    <Provider store={store}>
-      <View style={styles.container}>
-        <Text style={styles.textContainer}>Unplug and Thrive</Text>
+
+        //verify login with database
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.textContainer} h3>Unplug and Thrive</Text>
 
 
-        <View style={styles.form}>
-          <Input
-            placeholder='Employee Number'
-            shake={true}
-            editable={this.state.inputFields}
-            inputStyle={{ color: "rgba(253,255,252,1)" }}
-            errorStyle={{ color: 'red' }}
-            onChangeText={(text) => this.setState({ accountNumber: text })}
-            errorMessage={this.state.accountNumberRequired}
-          />
+                <View style={styles.form}>
+                    <Input
+                        placeholder='Employee Number'
+                        shake={true}
+                        editable={this.state.inputFields}
+                        inputStyle={{ color: "rgba(253,255,252,1)" }}
+                        errorStyle={{ color: 'red' }}
+                        onChangeText={(text) => this.setState({ accountNumber: text })}
+                        errorMessage={this.state.accountNumberRequired}
+                    />
 
-          <Input
-            placeholder='Password'
-            shake={true}
-            secureTextEntry={true}
-            editable={this.state.inputFields}
-            inputStyle={{ color: "rgba(253,255,252,1)" }}
-            errorStyle={{ color: 'red' }}
-            onChangeText={(text) => this.setState({ password: text })}
-            errorMessage={this.state.passwordRequired}
-          />
-          <Button
-            title="Sign In"
-            disabled={this.state.signInDisabled}
-            disabledStyle={{ backgroundColor: '#0b3954' }}
-            buttonStyle={{ backgroundColor: '#0b3954' }}
-            containerStyle={styles.button}
-            loading={this.state.buttonStatus}
-            titleStyle={{ color: "rgba(253,255,252,1)" }}
-            onPress={() => { this.signIn() }}
-          />
-        </View>
-      </View>
-    </Provider>
-    );
-  }
+                    <Input
+                        placeholder='Password'
+                        shake={true}
+                        secureTextEntry={true}
+                        editable={this.state.inputFields}
+                        inputStyle={{ color: "rgba(253,255,252,1)" }}
+                        errorStyle={{ color: 'red' }}
+                        onChangeText={(text) => this.setState({ password: text })}
+                        errorMessage={this.state.passwordRequired}
+                    />
+                    <Button
+                        title="Sign In"
+                        disabled={this.state.signInDisabled}
+                        disabledStyle={{ backgroundColor: '#0b3954' }}
+                        buttonStyle={{ backgroundColor: '#0b3954' }}
+                        containerStyle={styles.button}
+                        loading={this.state.buttonStatus}
+                        titleStyle={{ color: "rgba(253,255,252,1)" }}
+                        onPress={() => { this.signIn() }}
+                    />
+                </View>
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgb(8,126,139)',
-  },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgb(8,126,139)',
+    },
 
-  form: {
-    backgroundColor: "rgba(253,255,252, 0.5)",
-    width: "80%",
-    padding: "5%",
-    borderRadius: 20,
-  },
+    form: {
+        backgroundColor: "rgba(253,255,252, 0.5)",
+        width: "80%",
+        padding: "5%",
+        borderRadius: 20,
+    },
 
-  button: {
-    marginTop: 10,
-  },
+    button: {
+        marginTop: 10,
+    },
 
-  textContainer: {
-    marginHorizontal: '5%',
-    color: "rgba(253,255,252,1)",
-    marginBottom: "10%",
-    fontWeight: 'bold',
-  },
+    textContainer: {
+        marginHorizontal: '5%',
+        color: "rgba(253,255,252,1)",
+        marginBottom: "10%",
+        fontWeight: 'bold',
+    },
 
 });
-
-export default App (null, {fetchPosts})(app)
