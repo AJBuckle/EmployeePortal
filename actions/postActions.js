@@ -1,24 +1,7 @@
-import { FETCH_POSTS, NEW_POST, LOGIN_USER } from './types';
+import {  LOGIN_USER } from './types';
 
 
-export const fetchPosts = () => dispatch => {
-    fetch("https://jsonplaceholder.typicode.com/posts")
-        .then(res => res.json())
-        .then(retrievedData => dispatch({
-            type:FETCH_POSTS,
-            payload:retrievedData
-        }))
-}
-
-export const newPost = data => dispatch => {
-    dispatch({
-        type: NEW_POST,
-        payload:data
-    })
-}
-
-export const changeStatus = () => dispatch =>{
-    console.log("In change status")
+export const setUserToLoggedIn = () => dispatch =>{
     dispatch({
         type:LOGIN_USER
     })

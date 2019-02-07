@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import {  StyleSheet, Text, View, Button, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux'
-import { fetchPosts, newPost, changeStatus } from '../actions/postActions'
+import { fetchPosts, newPost, setUserToLoggedIn } from '../actions/postActions'
 
 
 class Test extends  Component{
@@ -12,13 +12,11 @@ class Test extends  Component{
         super(props)
         this.click = this.click.bind(this);
     }
-    componentWillMount(){
-        this.props.fetchPosts();
-    }
+
     click(){
-        this.props.newPost("Jappadog");
+
         console.log(this.props.loginStatus)
-        this.props.changeStatus();
+        this.props.setUserToLoggedIn();
         AsyncStorage.removeItem("Status")
             .then(resp => console.log("Async storage cleared: resp=> "+ resp))
     }
@@ -45,5 +43,5 @@ const mapStateToProps = state => ({
     loginStatus: state.posts.loginStatus
 })
 
- export default connect(mapStateToProps, {fetchPosts, newPost, changeStatus})(Test)
+ export default connect(mapStateToProps, {fetchPosts, newPost, setUserToLoggedIn})(Test)
 

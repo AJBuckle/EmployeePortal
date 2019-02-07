@@ -1,21 +1,14 @@
 
 import React, { Component }  from 'react';
-import { StyleSheet, View, Platform, AsyncStorage } from 'react-native';
-import { Provider, connect  } from 'react-redux';
-import store from '../store'
+import { StyleSheet, View, AsyncStorage } from 'react-native';
+import {  connect  } from 'react-redux';
 import { Input, Button, Text } from 'react-native-elements';
-import SecondTab from './SecondTab'
-import { changeStatus } from '../actions/postActions'
-
-const instructions = Platform.select({
-    ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-    android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import { setUserToLoggedIn } from '../actions/postActions'
 
 
-class Login extends Component{
+
+class LoginPage extends Component{
+
     constructor(props) {
         super(props);
         this.state = {
@@ -30,12 +23,28 @@ class Login extends Component{
         }
 
     }
-    componentWillMount(){
-        this.getStatus()
-            .then(response =>{
-                console.log("Response from getStatus: " + response)
-            })
-    }
+
+    // componentWillMount(){
+    //     this.getStatus()
+    //         .then(response =>{
+    //             console.log("Response from getStatus: " + response)
+    //         })
+    // }
+    // why if i have these two functions am i geting a error
+
+    // getStatus = async() =>{
+    //     try {
+    //         let status = await AsyncStorage.getItem("Status");
+    //
+    //         if(status == "true"){
+    //             this.setState({signedIn:true})
+    //         }
+    //         return null;
+    //     }
+    //     catch (error){
+    //         return error;
+    //     }
+    // };
 
     signIn = () => {
         let accountNumber = this.state.accountNumber;
@@ -57,39 +66,28 @@ class Login extends Component{
                         inputFields: false,
                     });
                     this.saveStatus()
-                        .then(response =>{console.log(response)})
+                        .catch(err => console.log(err))
                 }
             });
         }
-
-
         //verify login with database
     }
+
     saveStatus = async() =>{
         try {
-            await AsyncStorage.setItem("Status", "true")
-            this.setState({signedIn:true})
+            await AsyncStorage.setItem("Status", "true");
+            this.props.setUserToLoggedIn();
+            return null; // here for testing purposes
         }
         catch (error){
-            console.log(error)
+            return error;
         }
-    }
-    getStatus = async() =>{
-        try {
-            let status = await AsyncStorage.getItem("Status");
-            if(status == "true"){
-                this.setState({signedIn:true})
-            }
-            return ("Value of status is: "+ status)
-        }
-        catch (error){
-            console.log(error)
-        }
-    }
+    };
+
+
 
 
     render() {
-        if(this.state.signedIn == false ){
             return (
                 <View style={styles.container}>
                     <Text style={styles.textContainer} h3>Unplug and Thrive</Text>
@@ -128,14 +126,6 @@ class Login extends Component{
                     </View>
                 </View>
             )
-        }
-        else{
-            return(
-                <Provider store={store}>
-                    <SecondTab/>
-                </Provider>
-            )
-        }
     }
 }
 
@@ -168,10 +158,6 @@ const styles = StyleSheet.create({
 
 });
 
-const mapStateToProps = state => ({
-    jap: state.posts.items,    // posts come from what you named the reducer in index. items comes from postreducer file
-    newItem: state.posts.item,
-    loginStatus: state.posts.loginStatus
-})
 
-export default connect(mapStateToProps, {changeStatus})(Login)
+// not mapping any props as of right now
+export default connect(null, {setUserToLoggedIn})(LoginPage)
