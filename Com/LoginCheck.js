@@ -32,9 +32,12 @@ class LoginCheck extends Component{
 
     }
 
+
     componentDidMount(){
         SplashScreen.hide();
     }
+
+
     async componentWillMount(){
         try {
             let status = await AsyncStorage.getItem("Status")
@@ -49,13 +52,10 @@ class LoginCheck extends Component{
         }
     }
 
-    //  getStatus(){
-    //     return new Promise()
-    //
-    // };
 
     render() {
         console.log("In render: "+ this.props.loginStatus);
+
         if(this.props.loginStatus == false ){
             return(
             <Provider store={store}>
@@ -63,6 +63,7 @@ class LoginCheck extends Component{
             </Provider>
             )
         }
+
         else{
             return(
                 <Provider store={store}>
