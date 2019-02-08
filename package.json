@@ -4,13 +4,20 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "android": "node_modules/.bin/react-native run-android",
     "test": "jest"
   },
   "dependencies": {
+    "i": "^0.3.6",
     "react": "16.6.3",
     "react-native": "0.58.3",
     "react-native-elements": "^1.0.0",
-    "react-native-vector-icons": "^6.2.0"
+    "react-native-splash-screen": "^3.0.6",
+    "react-native-vector-icons": "^6.2.0",
+    "react-navigation": "^3.1.5",
+    "react-redux": "^6.0.0",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "babel-core": "^7.0.0-bridge.0",
