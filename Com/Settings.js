@@ -2,7 +2,7 @@
  * Created by japjohal on 2019-02-08.
  */
 import React, { Component } from 'react';
-import {  AsyncStorage, View, TextInput} from 'react-native';
+import {  AsyncStorage, View} from 'react-native';
 import { Text , Button} from 'react-native-elements';
 import { connect } from 'react-redux'
 import {  setUserToLoggedOut } from '../actions/postActions'
@@ -16,9 +16,11 @@ class Settings extends Component {
         // not needed
         // console.log(this.props.loginStatus)
         // this.props.setUserToLoggedIn();
+        // fetch("http://localhost:3000/employees")
+        //     .then(resp => resp.json())
+        //     .then(resp => {console.log(resp)})
         AsyncStorage.removeItem("Status")
-            .then(resp => console.log("Async storage cleared: resp=> "+ resp))
-        this.props.setUserToLoggedOut();
+            .then(resp => this.props.setUserToLoggedOut())
     }
 
     render() {

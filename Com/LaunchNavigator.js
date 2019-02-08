@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
-import Test from "./Test";
+import Test from "./HomeTab";
 import Settings from "./Settings";
 
 
