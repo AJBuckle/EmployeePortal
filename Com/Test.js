@@ -23,8 +23,8 @@ class Test extends  Component{
 
     render(){
         return(
-            <View styles={{ color:'red'}}>
-                <Text style={{fontSize:18, top:50, left:60,color:'white'}}> hello world {this.props.loginStatus.toString()}</Text>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor:'white' }}>
+                <Text style={{fontSize:18, top:50, left:60,color:'black'}}> hello world {this.props.loginStatus.toString()}</Text>
                 <Button
                     title="ClickME"
                     onPress={this.click}
