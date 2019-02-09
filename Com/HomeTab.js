@@ -2,23 +2,73 @@
  * Created by japjohal on 2019-01-13.
  */
 import React, { Component } from 'react';
-import {  StyleSheet,  View } from 'react-native';
-import { Text , Button , Image} from 'react-native-elements';
+import {  StyleSheet,  View, FlatList, SafeAreaView } from 'react-native';
+import { Text, Button, Image, ListItem} from 'react-native-elements';
 import { connect } from 'react-redux'
 import { setUserToLoggedIn } from '../actions/postActions'
 
 
-class Test extends  Component{
+class HomeTab extends  Component{
     constructor(props){
         super(props)
+        this.state ={
+            data:[{name:"jason",key:"1"},{name:"jap",key:"2"},{name:"jason",key:"3"},{name:"jap",key:"4"},{name:"iii",key:"5"},{name:"bb",key:"6"},{name:"qqq",key:"7"},{name:"ddd",key:"8"},{name:"ggg",key:"9"},{name:"lll",key:"10"},{name:"opopo",key:"11"},{name:"adsf",key:"12"}],
+            pic: "../avatars/ava.png"
+        }
     }
 
 
+    componentDidMount(){
+        fetch("http://localhost:3000/services/1")
+            .then(resp =>{
+                return resp.json();
+            })
+            .then((resp) => console.log(resp))
+
+    }
+    keyExtractor = (item, index) => index
+    renderItem = ({ item }) => (
+        <ListItem
+            title={item.name}
+            subtitle={item.subtitle}
+            leftAvatar={{ source: require("../avatars/ava.png")}}
+        />
+    )
+
     render(){
+
+        let list  =
+            this.state.data.map((i,key) =>(
+            <ListItem
+                key={i.key}
+                leftAvatar={{ source: require("../avatars/ava.png")}}
+                title={i.name}
+                subtitle={i.name}
+                style={{}}
+            />
+        ))
+
         return(
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor:'white' }}>
-                <Text style={{fontSize:18, top:50, left:60,color:'black'}}> hello world {this.props.loginStatus.toString()}</Text>
-            </View>
+            <SafeAreaView style={{flex:1, backgroundColor: "#e6e6e6"}}>
+                <View style={{flex:1}}>
+                    <Text>Hello</Text>
+                <FlatList
+                    data={this.state.data}
+                    keyExtractor={item => item.key}
+                    renderItem={({item}) =>
+                            <ListItem
+                              key={item.name}
+                              leftAvatar={{ source: require("../avatars/ava.png")}}
+                              title={item.name}
+                              subtitle={item.name}
+                          />
+                        }
+                />
+                </View>
+                <View style={{flex:1}}>
+                    <Text>Hello</Text>
+                </View>
+            </SafeAreaView>
         )
     }
 }
@@ -32,5 +82,5 @@ const mapStateToProps = state => ({
     loginStatus: state.posts.loginStatus
 })
 
- export default connect(mapStateToProps, { setUserToLoggedIn})(Test)
+ export default connect(mapStateToProps, { setUserToLoggedIn})(HomeTab)
 
