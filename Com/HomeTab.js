@@ -6,7 +6,7 @@ import {  StyleSheet,  View, FlatList, SafeAreaView } from 'react-native';
 import { Text, Button, Image, ListItem} from 'react-native-elements';
 import { connect } from 'react-redux'
 import { setUserToLoggedIn } from '../actions/postActions'
-
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 class HomeTab extends  Component{
     constructor(props){
@@ -67,6 +67,10 @@ class HomeTab extends  Component{
                 </View>
                 <View style={{flex:1}}>
                     <Text>Hello</Text>
+                    <Button
+                        title="Go to Details"
+                        onPress={() => this.props.navigation.navigate('ItemDetail')}
+                        />
                 </View>
             </SafeAreaView>
         )
