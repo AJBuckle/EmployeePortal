@@ -2,7 +2,7 @@ import React, { Component }  from 'react';
 import { StyleSheet, Platform, AsyncStorage } from 'react-native';
 import { Provider, connect  } from 'react-redux';
 import store from '../store'
-import SecondTab from './LaunchNavigator'
+import LaunchTabNavigator from './LaunchTabNavigator'
 import LoginPage from './LoginPage'
 import { setUserToLoggedIn } from '../actions/postActions'
 import SplashScreen from 'react-native-splash-screen';
@@ -67,7 +67,7 @@ class LoginCheck extends Component{
         else{
             return(
                 <Provider store={store}>
-                    <SecondTab/>
+                    <LaunchTabNavigator/>
                 </Provider>
             )
         }

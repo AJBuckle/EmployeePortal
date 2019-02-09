@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
-import HomeTab from "./HomeTab";
+import HomeTab from "./UserHome";
 import Settings from "./Settings";
-import HomePageTab from './HomePageTab'
+import HomePageTabNavigation from './HomePageTabNavigation'
 
 const TabNavigator = createBottomTabNavigator({
-    Home:HomePageTab,
+    Home:HomePageTabNavigation,
     Settings:Settings
 });
 
