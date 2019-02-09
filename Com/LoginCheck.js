@@ -2,7 +2,7 @@ import React, { Component }  from 'react';
 import { StyleSheet, Platform, AsyncStorage } from 'react-native';
 import { Provider, connect  } from 'react-redux';
 import store from '../store'
-import SecondTab from './SecondTab'
+import LaunchTabNavigator from './LaunchTabNavigator'
 import LoginPage from './LoginPage'
 import { setUserToLoggedIn } from '../actions/postActions'
 import SplashScreen from 'react-native-splash-screen';
@@ -32,9 +32,12 @@ class LoginCheck extends Component{
 
     }
 
+
     componentDidMount(){
         SplashScreen.hide();
     }
+
+
     async componentWillMount(){
         try {
             let status = await AsyncStorage.getItem("Status")
@@ -49,13 +52,10 @@ class LoginCheck extends Component{
         }
     }
 
-    //  getStatus(){
-    //     return new Promise()
-    //
-    // };
 
     render() {
         console.log("In render: "+ this.props.loginStatus);
+
         if(this.props.loginStatus == false ){
             return(
             <Provider store={store}>
@@ -63,10 +63,11 @@ class LoginCheck extends Component{
             </Provider>
             )
         }
+
         else{
             return(
                 <Provider store={store}>
-                    <SecondTab/>
+                    <LaunchTabNavigator/>
                 </Provider>
             )
         }

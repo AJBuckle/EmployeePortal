@@ -1,9 +1,14 @@
-import {  LOGIN_USER } from './types';
+import {  LOGIN_USER, LOGOUT_USER } from './types';
 
 
 export const setUserToLoggedIn = () => dispatch =>{
     dispatch({
         type:LOGIN_USER
+    })
+}
+export const setUserToLoggedOut = () => dispatch =>{
+    dispatch({
+        type:LOGOUT_USER
     })
 }
 
