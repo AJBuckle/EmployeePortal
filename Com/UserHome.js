@@ -6,6 +6,7 @@ import {  View, FlatList, SafeAreaView, TouchableWithoutFeedback } from 'react-n
 import { Text, Button,  ListItem} from 'react-native-elements';
 import { connect } from 'react-redux'
 import { createStackNavigator, createAppContainer } from 'react-navigation';
+import SplashScreen from 'react-native-splash-screen';
 
 class HomeTab extends  Component{
     constructor(props){
@@ -19,15 +20,10 @@ class HomeTab extends  Component{
     static navigationOptions = {
         title: 'Home',
     }
-
     componentDidMount(){
-        // fetch("http://localhost:3000/services/1")
-        //     .then(resp =>{
-        //         return resp.json();
-        //     })
-        //     .then((resp) => )
-
+        SplashScreen.hide();
     }
+
 
     ClickMe(data){
         console.log("in click me")
@@ -42,8 +38,9 @@ class HomeTab extends  Component{
     render(){
         return(
 
-            <SafeAreaView style={{flex:1, backgroundColor: "#e6e6e6"}}>
-                <View style={{flex:1}}>
+            <SafeAreaView style={{flex:1, backgroundColor: "white"}}>
+                <View style={{flex:1, backgroundColor: "yellow"}}>
+                    <Text style={{textAlign: "center"}}>Jobs</Text>
                 <FlatList
                     data={this.state.data}
                     keyExtractor={item => item.key}
@@ -54,6 +51,7 @@ class HomeTab extends  Component{
                               leftAvatar={{ source: require("../avatars/ava.png")}}
                               title={item.name}
                               subtitle={item.name}
+
                           />
                      </TouchableWithoutFeedback>
                         }
@@ -61,10 +59,6 @@ class HomeTab extends  Component{
                 </View>
                 <View style={{flex:1}}>
                     <Text>Hello</Text>
-                    <Button
-                        title="Go to Details"
-                        onPress={() => this.props.navigation.navigate('CustomerDetial')}
-                        />
                 </View>
             </SafeAreaView>
         )

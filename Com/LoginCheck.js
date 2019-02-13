@@ -33,9 +33,7 @@ class LoginCheck extends Component{
     }
 
 
-    componentDidMount(){
-        SplashScreen.hide();
-    }
+
 
 
     async componentWillMount(){

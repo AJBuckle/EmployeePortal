@@ -1,10 +1,9 @@
-
 import React, { Component }  from 'react';
 import { StyleSheet, View, AsyncStorage } from 'react-native';
 import {  connect  } from 'react-redux';
 import { Input, Button, Text } from 'react-native-elements';
 import { setUserToLoggedIn } from '../actions/postActions'
-
+import SplashScreen from 'react-native-splash-screen';
 
 
 class LoginPage extends Component{
@@ -24,27 +23,10 @@ class LoginPage extends Component{
 
     }
 
-    // componentWillMount(){
-    //     this.getStatus()
-    //         .then(response =>{
-    //             console.log("Response from getStatus: " + response)
-    //         })
-    // }
-    // why if i have these two functions am i geting a error
+    componentDidMount(){
+        SplashScreen.hide();
+    }
 
-    // getStatus = async() =>{
-    //     try {
-    //         let status = await AsyncStorage.getItem("Status");
-    //
-    //         if(status == "true"){
-    //             this.setState({signedIn:true})
-    //         }
-    //         return null;
-    //     }
-    //     catch (error){
-    //         return error;
-    //     }
-    // };
 
     signIn = () => {
         let accountNumber = this.state.accountNumber;
