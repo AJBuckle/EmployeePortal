@@ -5,7 +5,6 @@ import React, { Component } from 'react';
 import {  View, FlatList, SafeAreaView, TouchableWithoutFeedback } from 'react-native';
 import { Text, Button,  ListItem} from 'react-native-elements';
 import { connect } from 'react-redux'
-import { createStackNavigator, createAppContainer } from 'react-navigation';
 import SplashScreen from 'react-native-splash-screen';
 
 class HomeTab extends  Component{
