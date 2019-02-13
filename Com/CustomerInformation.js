@@ -6,6 +6,9 @@ import {  StyleSheet,  View, FlatList, SafeAreaView, TouchableWithoutFeedback } 
 import { Text, Button, Image, ListItem} from 'react-native-elements';
 
 export default class CustomerInformation extends Component {
+    static navigationOptions = {
+        title: 'Customer Info',
+    }
     render(){
         const { navigation } = this.props;
         const name = navigation.getParam("name","Jap")

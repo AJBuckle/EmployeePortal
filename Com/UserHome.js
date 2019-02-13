@@ -16,7 +16,9 @@ class HomeTab extends  Component{
         }
         this.ClickMe = this.ClickMe.bind(this);
     }
-
+    static navigationOptions = {
+        title: 'Home',
+    }
 
     componentDidMount(){
         // fetch("http://localhost:3000/services/1")
