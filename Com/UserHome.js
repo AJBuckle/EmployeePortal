@@ -26,14 +26,7 @@ class HomeTab extends  Component{
         //     .then((resp) => )
 
     }
-    // keyExtractor = (item, index) => index
-    // renderItem = ({ item }) => (
-    //     <ListItem
-    //         title={item.name}
-    //         subtitle={item.subtitle}
-    //         leftAvatar={{ source: require("../avatars/ava.png")}}
-    //     />
-    // )
+
     ClickMe(data){
         console.log("in click me")
         console.log(data)
@@ -45,17 +38,6 @@ class HomeTab extends  Component{
 
 
     render(){
-
-        // let list  =
-        //     this.state.data.map((i,key) => (
-        //     <ListItem
-        //         key={i.key}
-        //         leftAvatar={{ source: require("../avatars/ava.png")}}
-        //         title={i.name}
-        //         subtitle={i.name}
-        //     />
-        // ))
-
         return(
 
             <SafeAreaView style={{flex:1, backgroundColor: "#e6e6e6"}}>
