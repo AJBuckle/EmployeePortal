@@ -1,12 +1,12 @@
-
 import React, { Component }  from 'react';
-import { StyleSheet, View, AsyncStorage } from 'react-native';
+import { StyleSheet, View, AsyncStorage, AlertIOS } from 'react-native';
 import {  connect  } from 'react-redux';
 import { Input, Button, Text } from 'react-native-elements';
-import { setUserToLoggedIn } from '../actions/postActions'
+import { setUserToLoggedIn, userWillUseFaceID } from '../actions/postActions'
+import SplashScreen from 'react-native-splash-screen';
+import TouchID from 'react-native-touch-id'
 
-
-
+// why isnt signIn binded
 class LoginPage extends Component{
 
     constructor(props) {
@@ -19,32 +19,16 @@ class LoginPage extends Component{
             inputFields: true,
             passwordRequired: null,
             accountNumberRequired: null,
-            signedIn:false
+            signedIn:false,
+            signIn:"Submit",
         }
 
     }
 
-    // componentWillMount(){
-    //     this.getStatus()
-    //         .then(response =>{
-    //             console.log("Response from getStatus: " + response)
-    //         })
-    // }
-    // why if i have these two functions am i geting a error
+    componentDidMount(){
+        SplashScreen.hide();
+    }
 
-    // getStatus = async() =>{
-    //     try {
-    //         let status = await AsyncStorage.getItem("Status");
-    //
-    //         if(status == "true"){
-    //             this.setState({signedIn:true})
-    //         }
-    //         return null;
-    //     }
-    //     catch (error){
-    //         return error;
-    //     }
-    // };
 
     signIn = () => {
         let accountNumber = this.state.accountNumber;
@@ -65,7 +49,7 @@ class LoginPage extends Component{
                         signInDisabled: true,
                         inputFields: false,
                     });
-                    this.saveStatus()
+                    this.setUserToLoggedIn()
                         .catch(err => console.log(err))
                 }
             });
@@ -73,7 +57,35 @@ class LoginPage extends Component{
         //verify login with database
     }
 
-    saveStatus = async() =>{
+    signInFaceId(){
+
+        const optionalConfigObject = {
+            fallbackLabel: "Show Passcode", // iOS
+            passcodeFallback: true // iOS
+        }
+
+        TouchID.authenticate('to demo this react-native component', optionalConfigObject)
+            .then(success => {
+                this.setUserToLoggedIn().catch((err) =>AlertIOS.alert(err))
+            })
+            .catch(error => {
+                AlertIOS.alert('Authentication Failed');
+            });
+    }
+
+    componentWillMount(){
+        this.getBioMetricsStatus();
+
+    }
+
+    getBioMetricsStatus = async() =>{
+        let status = await AsyncStorage.getItem("faceId");
+        if(status == "true"){
+            this.props.userWillUseFaceID();
+        }
+    };
+
+    setUserToLoggedIn = async() =>{
         try {
             await AsyncStorage.setItem("Status", "true");
             this.props.setUserToLoggedIn();
@@ -114,14 +126,14 @@ class LoginPage extends Component{
                             errorMessage={this.state.passwordRequired}
                         />
                         <Button
-                            title="Sign In"
+                            title={this.props.faceIdStatus == true? "Login with FaceID ":"Login"}
                             disabled={this.state.signInDisabled}
                             disabledStyle={{ backgroundColor: '#0b3954' }}
                             buttonStyle={{ backgroundColor: '#0b3954' }}
                             containerStyle={styles.button}
                             loading={this.state.buttonStatus}
                             titleStyle={{ color: "rgba(253,255,252,1)" }}
-                            onPress={() => { this.signIn() }}
+                            onPress={() => { this.props.faceIdStatus == true? this.signInFaceId():this.signIn() }}
                         />
                     </View>
                 </View>
@@ -158,6 +170,8 @@ const styles = StyleSheet.create({
 
 });
 
+const mapStateToProps = state => ({
+    faceIdStatus: state.posts.usingFaceId
+})
 
-// not mapping any props as of right now
-export default connect(null, {setUserToLoggedIn})(LoginPage)
+export default connect(mapStateToProps, {setUserToLoggedIn, userWillUseFaceID })(LoginPage)
