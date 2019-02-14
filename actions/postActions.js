@@ -1,4 +1,4 @@
-import {  LOGIN_USER, LOGOUT_USER } from './types';
+import {  LOGIN_USER, LOGOUT_USER, USE_FACE_ID, DO_NOT_USE_FACE_ID } from './types';
 
 
 export const setUserToLoggedIn = () => dispatch =>{
@@ -12,17 +12,14 @@ export const setUserToLoggedOut = () => dispatch =>{
     })
 }
 
-// try removing the first or second dispatch
-// this is the changed dispatch
-// probally not using this function
-// export const newReduced = data => ({
-//     type: SECOND_REDUCER,
-//     payload:data
-// })
+export const userWillUseFaceID = () => dispatch =>{
+    dispatch({
+        type:USE_FACE_ID
+    })
+}
 
-// export const newReduced = data => dispatch => {
-//     dispatch({
-//         type: SECOND_REDUCER,
-//         payload:data
-//     })
-// }
+export const userWillNotUseFaceID = () => dispatch =>{
+    dispatch({
+        type:DO_NOT_USE_FACE_ID
+    })
+}

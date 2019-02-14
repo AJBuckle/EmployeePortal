@@ -2,10 +2,9 @@ import React, { Component }  from 'react';
 import { StyleSheet, Platform, AsyncStorage } from 'react-native';
 import { Provider, connect  } from 'react-redux';
 import store from '../store'
-import LaunchTabNavigator from './TabNavigator'
+import TabNavigator from './TabNavigator'
 import LoginPage from './LoginPage'
 import { setUserToLoggedIn } from '../actions/postActions'
-import SplashScreen from 'react-native-splash-screen';
 
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -14,36 +13,18 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-
 class LoginCheck extends Component{
 
     constructor(props) {
         super(props);
-        this.state = {
-            accountNumber: "",
-            password: "",
-            buttonStatus: false,
-            signInDisabled: false,
-            inputFields: true,
-            passwordRequired: null,
-            accountNumberRequired: null,
-            signedIn:false
-        }
-
     }
-
-
-
-
 
     async componentWillMount(){
         try {
             let status = await AsyncStorage.getItem("Status")
-            console.log(status)
             if(status == "true"){
                 this.props.setUserToLoggedIn();
             }
-            console.log(this.props.loginStatus);
         }
         catch (error) {
             return error;
@@ -52,7 +33,6 @@ class LoginCheck extends Component{
 
 
     render() {
-        console.log("In render: "+ this.props.loginStatus);
 
         if(this.props.loginStatus == false ){
             return(
@@ -65,7 +45,7 @@ class LoginCheck extends Component{
         else{
             return(
                 <Provider store={store}>
-                    <LaunchTabNavigator/>
+                    <TabNavigator/>
                 </Provider>
             )
         }

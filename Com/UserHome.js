@@ -19,13 +19,14 @@ class HomeTab extends  Component{
     static navigationOptions = {
         title: 'Home',
     }
+
     componentDidMount(){
         SplashScreen.hide();
     }
 
 
     ClickMe(data){
-        console.log("in click me")
+        console.log("in logOut me")
         console.log(data)
         this.props.navigation.navigate('CustomerDetail',{
             name:data.name,
@@ -70,7 +71,7 @@ class HomeTab extends  Component{
 const mapStateToProps = state => ({
     // jap: state.posts.items,    // posts come from what you named the reducer in index. items comes from postreducer file
     // newItem: state.posts.item,
-    loginStatus: state.posts.loginStatus
+    faceIdStatus: state.posts.loginStatus
 })
 
  export default connect(mapStateToProps,)(HomeTab)

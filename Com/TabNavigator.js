@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
-import HomeTab from "./UserHome";
 import Settings from "./Settings";
-import HomePageTabNavigation from './HomeStackNavigator';
+import HomeStackNavigator from './HomeStackNavigator';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const TabNavigator = createBottomTabNavigator({
     Home:{
-        screen: HomePageTabNavigation,
+        screen: HomeStackNavigator,
         navigationOptions: {
         tabBarLabel:"Home",
         tabBarIcon: ({ tintColor }) => (
