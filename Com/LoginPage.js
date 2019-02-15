@@ -1,5 +1,5 @@
 import React, { Component }  from 'react';
-import { StyleSheet, View, AsyncStorage, AlertIOS } from 'react-native';
+import { StyleSheet, View, AsyncStorage, Alert } from 'react-native';
 import {  connect  } from 'react-redux';
 import { Input, Button, Text } from 'react-native-elements';
 import { setUserToLoggedIn, userWillUseFaceID } from '../actions/postActions'
@@ -66,10 +66,10 @@ class LoginPage extends Component{
 
         TouchID.authenticate('to demo this react-native component', optionalConfigObject)
             .then(success => {
-                this.setUserToLoggedIn().catch((err) =>AlertIOS.alert(err))
+                this.setUserToLoggedIn().catch((err) =>Alert.alert(err))
             })
             .catch(error => {
-                AlertIOS.alert('Authentication Failed');
+                Alert.alert('Authentication Failed');
             });
     }
 
